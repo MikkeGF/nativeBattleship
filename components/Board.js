@@ -1,13 +1,30 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useRef } from 'react'
 import styled from 'styled-components/native'
+
+// import components
 import Row from './Row';
+import Start from './Start';
 
 const StyledView = styled.View`
-    flex: 6;
+    flex: 8;
     justify-content: center;
     align-items: center;
 `;
+const ResultView = styled.View`
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+`;
+
 const StyledText = styled.Text`
+    font-size: 16px;
+    margin: 5px;
+`;
+
+const TextView = styled.View`
+    margin: 10px;
+    flex-direction: row;
+    justify-content: space-between;
 
 `;
 
@@ -19,16 +36,19 @@ export default function Board() {
 
 
     const [isMark, setMark] = useState(true);
-    const [ships, setShips] = useState();
+    const [start, startGame] = useState(false)
+    const [seconds, setSeconds] = useState(30)
+    const [ships, setShips] = useState({});
     const [shipcount, setShipCount] = useState(3)
+    const [hit, setHit] = useState(0)
     const [clickcount, setClickCount] = useState(15)
     const [winner, setWinner] = useState('');
     const [board, setBoard] = useState([]);
+
+    const timerRef = useRef();
+
     console.log(ships)
-
-
-
-    useEffect(() => {
+    const makeBoard = () => {
         let gameboard = [];
         gameboard = Array(25).fill(START)
         setBoard(gameboard)
@@ -38,35 +58,68 @@ export default function Board() {
             nums.add(Math.floor(Math.random() * 24));
         }
         setShips(nums)
+    }
 
+
+    useEffect(() => {
+        makeBoard()
     }, [])
+
+    useEffect(() => {
+        if (seconds === 0 || shipcount === 0 || clickcount === 0) {
+            stopTimer();
+            setWinner(gameResult())
+        }
+    });
+
+
+
+    const startTimer = () => {
+        const interval = setInterval(() => {
+            setSeconds(seconds => seconds - 1);
+        }, 1000);
+        timerRef.current = interval
+    }
+
+    const stopTimer = () => {
+        clearInterval(timerRef.current)
+    }
 
 
     const checkAnswer = number => {
-
-        if (shipcount > 0 && clickcount > 0) {
+        if (!start) {
+            alert('Start game first')
+        }
+        else if (shipcount > 0 && clickcount > 0) {
             setClickCount(clickcount - 1)
 
             if (ships.has(number)) {
                 board[number] = CIRCLE
                 setMark(!isMark)
                 setShipCount(shipcount - 1)
-
+                setHit(hit + 1)
             }
-
             else {
                 board[number] = CROSS
                 setMark(!isMark)
 
             }
         }
-        
-
-
+        else {
+            setWinner(gameResult())
+        }
     }
 
     const resetGame = () => {
-
+        stopTimer()
+        makeBoard()
+        setMark(true)
+        startGame(false)
+        setSeconds(30)
+        setShipCount(3)
+        setHit(0)
+        setClickCount(15)
+        setWinner('')
     }
 
     const chooseItemColor = number => {
@@ -83,14 +136,14 @@ export default function Board() {
 
     const gameResult = () => {
 
-        if (shipcount == 0) {
-            return 'You Win'
+        if (seconds === 0) {
+            return 'Time is up! Ships remaining'
         }
-        else if (clickcount == 0) {
-            return 'Out of bombs'
+        if (shipcount === 0) {
+            return 'You sinked all ships!'
         }
-        else {
-            return ''
+        if (clickcount === 0) {
+            return 'Out of bombs. Ships remaining'
         }
 
     }
@@ -106,7 +159,7 @@ export default function Board() {
                 checkAnswer={checkAnswer}
                 chooseItemColor={chooseItemColor}
                 board={board}
-                />
+            />
 
             <Row
                 key1={5}
@@ -117,7 +170,7 @@ export default function Board() {
                 checkAnswer={checkAnswer}
                 chooseItemColor={chooseItemColor}
                 board={board}
-                 />
+            />
             <Row
                 key1={10}
                 key2={11}
@@ -127,7 +180,7 @@ export default function Board() {
                 checkAnswer={checkAnswer}
                 chooseItemColor={chooseItemColor}
                 board={board}
-                />
+            />
             <Row
                 key1={15}
                 key2={16}
@@ -137,7 +190,7 @@ export default function Board() {
                 checkAnswer={checkAnswer}
                 chooseItemColor={chooseItemColor}
                 board={board}
-                />
+            />
             <Row
                 key1={20}
                 key2={21}
@@ -147,14 +200,37 @@ export default function Board() {
                 checkAnswer={checkAnswer}
                 chooseItemColor={chooseItemColor}
                 board={board}
-                />
-            <StyledText>
-                Ships left {shipcount}
-
-            </StyledText>
-            <StyledText>
-                turns left {clickcount}
-            </StyledText>
+            />
+            <ResultView>
+                {start && winner === '' ?
+                    <StyledText>
+                        The game is on...
+                </StyledText>
+                    :
+                    winner !== ''
+                        ? <StyledText> {winner}</StyledText>
+                        : <StyledText> Game is not started</StyledText>
+                }
+                <TextView>
+                    <StyledText>
+                        Ships left {shipcount}
+                    </StyledText>
+                    <StyledText>
+                        Hits {hit}
+                    </StyledText>
+                    <StyledText>
+                        Turns left {clickcount}
+                    </StyledText>
+                </TextView>
+                <StyledText>
+                    Time left: {seconds}
+                </StyledText>
+                <Start
+                    start={start}
+                    startGame={startGame}
+                    startTimer={startTimer}
+                    resetGame={resetGame} />
+            </ResultView>
         </StyledView>
     );
 }

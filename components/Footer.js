@@ -19,7 +19,7 @@ const StyledHeader = styled.Text`
 const Footer = () => {
     return (
         <StyledView>
-            <StyledHeader>TicTacToe</StyledHeader>
+            <StyledHeader>Author: Miikkael Peltokorpi</StyledHeader>
         </StyledView>
     )
 }

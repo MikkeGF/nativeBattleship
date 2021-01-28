@@ -21,8 +21,8 @@ const Box = ({number, checkAnswer, chooseItemColor, board}) => {
         <StyledPressable
             key={number}
             onPress={() => {
-                checkAnswer(number)
 
+                checkAnswer(number)
             } }>
             <Entypo
                 key={number}

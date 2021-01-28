@@ -1,7 +1,6 @@
 import { StatusBar } from 'expo-status-bar';
 import React from 'react';
 import Header from './components/Header'
-import styled from 'styled-components/native'
 import Board from './components/Board';
 import Footer from './components/Footer'
 
