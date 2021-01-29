@@ -27,7 +27,6 @@ const Row = (props) => {
                 keys.map((key) => (
                     <Box key={key} number={key} checkAnswer={checkAnswer} chooseItemColor={chooseItemColor} board={board} />
                 ))
-
             }
         </StyledView>
     )

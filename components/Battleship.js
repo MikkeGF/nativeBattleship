@@ -44,7 +44,7 @@ export default function Battleship() {
     const [clickcount, setClickCount] = useState(15)
     const [winner, setWinner] = useState('');
     const [board, setBoard] = useState([]);
-    const [keys, setKeys] = useState([])
+    // const [keys, setKeys] = useState([])
 
     const timerRef = useRef();
 
