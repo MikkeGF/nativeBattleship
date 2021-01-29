@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react'
 import styled from 'styled-components/native'
-
+import { Platform } from 'react-native'
 // import components
 import Row from './Row';
 import Start from './Start';
@@ -29,7 +29,7 @@ const TextView = styled.View`
 `;
 
 
-export default function Board() {
+export default function Battleship() {
     const START = 'plus'
     const CROSS = 'cross'
     const CIRCLE = 'circle'
@@ -44,10 +44,10 @@ export default function Board() {
     const [clickcount, setClickCount] = useState(15)
     const [winner, setWinner] = useState('');
     const [board, setBoard] = useState([]);
+    const [keys, setKeys] = useState([])
 
     const timerRef = useRef();
 
-    console.log(ships)
     const makeBoard = () => {
         let gameboard = [];
         gameboard = Array(25).fill(START)
@@ -59,6 +59,7 @@ export default function Board() {
         }
         setShips(nums)
     }
+
 
 
     useEffect(() => {
@@ -147,6 +148,8 @@ export default function Board() {
         }
 
     }
+
+
 
     return (
         <StyledView>

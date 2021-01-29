@@ -1,7 +1,7 @@
 import { StatusBar } from 'expo-status-bar';
 import React from 'react';
 import Header from './components/Header'
-import Board from './components/Board';
+import Battleship from './components/Battleship';
 import Footer from './components/Footer'
 
 export default function App() {
@@ -9,7 +9,7 @@ export default function App() {
     <React.Fragment>
       <Header />
       <StatusBar style="auto" />
-      <Board />
+      <Battleship />
       <Footer />
     </React.Fragment>
   );

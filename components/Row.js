@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import styled from 'styled-components/native'
 
 import Box from './Box'
@@ -12,15 +12,23 @@ const StyledView = styled.View`
 
 
 
-const Row = ({ key1, key2, key3, key4, key5, chooseItemColor, checkAnswer, board }) => {
+const Row = (props) => {
+
+    const { checkAnswer, chooseItemColor, board, key1, key2, key3, key4, key5 } = props;
+    const [keys, setKeys] = useState([])
+    useEffect(() => {
+        keys.push(key1, key2, key3, key4, key5)
+        setKeys(keys)
+    }, []);
 
     return (
         <StyledView>
-            <Box number={key1} checkAnswer={checkAnswer} chooseItemColor={chooseItemColor} board={board} />
-            <Box number={key2} checkAnswer={checkAnswer} chooseItemColor={chooseItemColor} board={board} />
-            <Box number={key3} checkAnswer={checkAnswer} chooseItemColor={chooseItemColor} board={board} />
-            <Box number={key4} checkAnswer={checkAnswer} chooseItemColor={chooseItemColor} board={board} />
-            <Box number={key5} checkAnswer={checkAnswer} chooseItemColor={chooseItemColor} board={board} />
+            {
+                keys.map((key) => (
+                    <Box key={key} number={key} checkAnswer={checkAnswer} chooseItemColor={chooseItemColor} board={board} />
+                ))
+
+            }
         </StyledView>
     )
 }
