@@ -68,11 +68,12 @@ export default function Battleship() {
     }, [])
 
     useEffect(() => {
+        console.log('run')
         if (seconds === 0 || shipcount === 0 || clickcount === 0) {
             stopTimer();
             setWinner(gameResult())
         }
-    });
+    }, [seconds, shipcount, clickcount]);
 
     const startTimer = () => {
         const interval = setInterval(() => {
