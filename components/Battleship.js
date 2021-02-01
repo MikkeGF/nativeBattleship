@@ -41,30 +41,34 @@ export default function Battleship() {
     const [ships, setShips] = useState({});
     const [shipcount, setShipCount] = useState(3)
     const [hit, setHit] = useState(0)
-    const [clickcount, setClickCount] = useState(15)
+
     const [winner, setWinner] = useState('');
     const [board, setBoard] = useState([]);
     const [numbers, setNumbers] = useState([])
-
     const timerRef = useRef();
+
+    // possible to select difficulty of game. No UI yet.
+    const [size, setSize] = useState(5)
+    const [clickcount, setClickCount] = useState(15)
 
     const makeBoard = () => {
         let gameboard = [];
-        gameboard = Array(25).fill(START)
+        gameboard = Array(size * size).fill(START)
         setBoard(gameboard)
 
         const nums = new Set();
         while (nums.size !== 3) {
-            nums.add(Math.floor(Math.random() * 24));
+            nums.add(Math.floor(Math.random() * (size * size - 1)));
         }
         setShips(nums)
     }
 
 
 
+
     useEffect(() => {
         makeBoard()
-        boardSize(5)
+        boardSize(size)
     }, [])
 
     useEffect(() => {
