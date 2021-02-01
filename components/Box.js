@@ -14,7 +14,6 @@ const StyledPressable = styled(Pressable)`
 
 const Box = ({number, checkAnswer, chooseItemColor, board}) => {
 
-
     return (
         <StyledPressable
             key={number}

@@ -74,8 +74,6 @@ export default function Battleship() {
         }
     });
 
-
-
     const startTimer = () => {
         const interval = setInterval(() => {
             setSeconds(seconds => seconds - 1);
@@ -86,7 +84,6 @@ export default function Battleship() {
     const stopTimer = () => {
         clearInterval(timerRef.current)
     }
-
 
     const checkAnswer = number => {
         if (!start) {
@@ -104,7 +101,6 @@ export default function Battleship() {
             else {
                 board[number] = CROSS
                 setMark(!isMark)
-
             }
         }
         else {
@@ -125,6 +121,7 @@ export default function Battleship() {
     }
 
     const chooseItemColor = number => {
+
         if (board[number] === CROSS) {
             return '#FF3031'
         }
@@ -151,6 +148,7 @@ export default function Battleship() {
     }
 
     const boardSize = (size) => {
+        
         let ArrayOfNumbers = Array.from(Array(size * size).keys())
         let newArray = [];
         let i = 0;
