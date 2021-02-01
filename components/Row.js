@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from 'react'
 import styled from 'styled-components/native'
-
+// Import components
 import Box from './Box'
+
 const StyledView = styled.View`
     display: flex;
     flex-direction: row;
@@ -9,16 +10,18 @@ const StyledView = styled.View`
     align-items: center;
 `;
 
+const Row = ({ rows, checkAnswer, chooseItemColor, board }) => {
 
-
-
-const Row = (props) => {
-    const {rows, checkAnswer, chooseItemColor, board } = props
     return (
         <StyledView>
             {
-                rows.map((key) => (
-                    <Box key={key} number={key} checkAnswer={checkAnswer} chooseItemColor={chooseItemColor} board={board} />
+                rows.map((number, index) => (
+                    <Box
+                        key={index}
+                        number={number}
+                        checkAnswer={checkAnswer}
+                        chooseItemColor={chooseItemColor}
+                        board={board} />
                 ))
             }
         </StyledView>

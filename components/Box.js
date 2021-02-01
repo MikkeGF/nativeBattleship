@@ -12,7 +12,7 @@ const StyledPressable = styled(Pressable)`
     align-items: center;
 `;
 
-const Box = ({number, checkAnswer, chooseItemColor, board}) => {
+const Box = ({ number, checkAnswer, chooseItemColor, board }) => {
 
     return (
         <StyledPressable

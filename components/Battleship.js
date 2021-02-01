@@ -148,7 +148,7 @@ export default function Battleship() {
     }
 
     const boardSize = (size) => {
-        
+
         let ArrayOfNumbers = Array.from(Array(size * size).keys())
         let newArray = [];
         let i = 0;
@@ -161,8 +161,9 @@ export default function Battleship() {
     return (
         <StyledView>
             {
-                numbers.map((rows) => (
+                numbers.map((rows, index) => (
                     <Row
+                        key={index}
                         rows={rows}
                         checkAnswer={checkAnswer}
                         chooseItemColor={chooseItemColor}
