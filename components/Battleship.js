@@ -41,29 +41,34 @@ export default function Battleship() {
     const [ships, setShips] = useState({});
     const [shipcount, setShipCount] = useState(3)
     const [hit, setHit] = useState(0)
-    const [clickcount, setClickCount] = useState(15)
+
     const [winner, setWinner] = useState('');
     const [board, setBoard] = useState([]);
-    // const [keys, setKeys] = useState([])
-
+    const [numbers, setNumbers] = useState([])
     const timerRef = useRef();
+
+    // possible to select difficulty of game. No UI yet.
+    const [size, setSize] = useState(5)
+    const [clickcount, setClickCount] = useState(15)
 
     const makeBoard = () => {
         let gameboard = [];
-        gameboard = Array(25).fill(START)
+        gameboard = Array(size * size).fill(START)
         setBoard(gameboard)
 
         const nums = new Set();
         while (nums.size !== 3) {
-            nums.add(Math.floor(Math.random() * 24));
+            nums.add(Math.floor(Math.random() * (size * size - 1)));
         }
         setShips(nums)
     }
 
 
 
+
     useEffect(() => {
         makeBoard()
+        boardSize(size)
     }, [])
 
     useEffect(() => {
@@ -149,61 +154,32 @@ export default function Battleship() {
 
     }
 
+    const boardSize = (size) => {
+        let ArrayOfNumbers = Array.from(Array(size * size).keys())
+        let newArray = [];
+        let i = 0;
+        for (i; i < size; i++) {
+            newArray.push(ArrayOfNumbers.splice(0, size))
+        }
+        setNumbers(newArray)
+    }
+
+
+
 
 
     return (
         <StyledView>
-            <Row
-                key1={0}
-                key2={1}
-                key3={2}
-                key4={3}
-                key5={4}
-                checkAnswer={checkAnswer}
-                chooseItemColor={chooseItemColor}
-                board={board}
-            />
-
-            <Row
-                key1={5}
-                key2={6}
-                key3={7}
-                key4={8}
-                key5={9}
-                checkAnswer={checkAnswer}
-                chooseItemColor={chooseItemColor}
-                board={board}
-            />
-            <Row
-                key1={10}
-                key2={11}
-                key3={12}
-                key4={13}
-                key5={14}
-                checkAnswer={checkAnswer}
-                chooseItemColor={chooseItemColor}
-                board={board}
-            />
-            <Row
-                key1={15}
-                key2={16}
-                key3={17}
-                key4={18}
-                key5={19}
-                checkAnswer={checkAnswer}
-                chooseItemColor={chooseItemColor}
-                board={board}
-            />
-            <Row
-                key1={20}
-                key2={21}
-                key3={22}
-                key4={23}
-                key5={24}
-                checkAnswer={checkAnswer}
-                chooseItemColor={chooseItemColor}
-                board={board}
-            />
+            {
+                numbers.map((rows) => (
+                    <Row
+                        rows={rows}
+                        checkAnswer={checkAnswer}
+                        chooseItemColor={chooseItemColor}
+                        board={board}
+                    />
+                ))
+            }
             <ResultView>
                 {start && winner === '' ?
                     <StyledText>
