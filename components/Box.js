@@ -10,21 +10,15 @@ const StyledPressable = styled(Pressable)`
     background-color: lightblue;
     justify-content:center;
     align-items: center;
-
-
 `;
 
 const Box = ({number, checkAnswer, chooseItemColor, board}) => {
 
 
     return (
-
         <StyledPressable
             key={number}
-            onPress={() => {
-
-                checkAnswer(number)
-            } }>
+            onPress={() => checkAnswer(number)}>
             <Entypo
                 key={number}
                 name={board[number]}

@@ -1,6 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react'
 import styled from 'styled-components/native'
-import { Platform } from 'react-native'
 // import components
 import Row from './Row';
 import Start from './Start';
@@ -63,9 +62,6 @@ export default function Battleship() {
         setShips(nums)
     }
 
-
-
-
     useEffect(() => {
         makeBoard()
         boardSize(size)
@@ -94,7 +90,7 @@ export default function Battleship() {
 
     const checkAnswer = number => {
         if (!start) {
-            alert('Start game first')
+            setWinner('You should start the game first.')
         }
         else if (shipcount > 0 && clickcount > 0) {
             setClickCount(clickcount - 1)
@@ -164,10 +160,6 @@ export default function Battleship() {
         setNumbers(newArray)
     }
 
-
-
-
-
     return (
         <StyledView>
             {
@@ -182,13 +174,13 @@ export default function Battleship() {
             }
             <ResultView>
                 {start && winner === '' ?
-                    <StyledText>
-                        The game is on...
+                <StyledText>
+                    The game is on...
                 </StyledText>
-                    :
-                    winner !== ''
-                        ? <StyledText> {winner}</StyledText>
-                        : <StyledText> Game is not started</StyledText>
+                :
+                winner !== ''
+                    ? <StyledText> {winner}</StyledText>
+                    : <StyledText> Game is not started</StyledText>
                 }
                 <TextView>
                     <StyledText>
@@ -208,7 +200,9 @@ export default function Battleship() {
                     start={start}
                     startGame={startGame}
                     startTimer={startTimer}
-                    resetGame={resetGame} />
+                    resetGame={resetGame}
+                    setWinner={setWinner}
+                />
             </ResultView>
         </StyledView>
     );

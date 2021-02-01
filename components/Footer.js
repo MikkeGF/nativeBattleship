@@ -14,7 +14,7 @@ const StyledHeader = styled.Text`
     font-weight: bold;
 
 
-`
+`;
 
 const Footer = () => {
     return (

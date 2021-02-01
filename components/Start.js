@@ -1,22 +1,22 @@
-import { setStatusBarBackgroundColor } from 'expo-status-bar';
-import React, { useState, useEffect } from 'react'
+
+import React from 'react'
 import { Button, View } from 'react-native';
 
-export default function Start({ start, startGame, startTimer, resetGame }) {
+export default function Start({ setWinner, start, startGame, startTimer, resetGame }) {
 
     const handleClick = () => {
         if (!start) {
             startTimer()
             startGame(true)
+            setWinner('')
         }
         else {
             resetGame()
         }
     }
-
     return (
         <View>
-            <Button title={start ? 'New game' : 'Start'} onPress={handleClick}></Button>
+            <Button title={start ? 'New game' : 'Start'} onPress={handleClick} />
         </View>
     )
 }
