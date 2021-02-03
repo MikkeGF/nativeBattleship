@@ -6,12 +6,12 @@ import Footer from './components/Footer'
 
 export default function App() {
   return (
-    <React.Fragment>
+    <>
       <Header />
       <StatusBar style="auto" />
       <Battleship />
       <Footer />
-    </React.Fragment>
+    </>
   );
 }
 
