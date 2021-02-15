@@ -45,7 +45,6 @@ export default function Battleship() {
     const [board, setBoard] = useState([]);
     const [numbers, setNumbers] = useState([])
     const timerRef = useRef();
-    console.log(ships)
 
     // possible to select difficulty of game. No UI yet.
     const [size, setSize] = useState(5)
