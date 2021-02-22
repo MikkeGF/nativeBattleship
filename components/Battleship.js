@@ -48,6 +48,7 @@ export default function Battleship() {
     // possible to select difficulty of game. No UI yet.
     const [size, setSize] = useState(5)
     const [clickcount, setClickCount] = useState(15)
+    
     const makeBoard = () => {
         let gameboard = [];
         gameboard = Array(size * size).fill(START)
