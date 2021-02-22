@@ -34,7 +34,7 @@ export default function Battleship() {
     const CIRCLE = 'circle'
 
 
-    const [isMark, setMark] = useState(true);
+
     const [start, startGame] = useState(false)
     const [seconds, setSeconds] = useState(30)
     const [ships, setShips] = useState({});
@@ -94,13 +94,11 @@ export default function Battleship() {
 
             if (ships.has(number)) {
                 board[number] = CIRCLE
-                setMark(!isMark)
                 setShipCount(shipcount - 1)
                 setHit(hit + 1)
             }
             else {
                 board[number] = CROSS
-                setMark(!isMark)
             }
         }
         else {
@@ -111,7 +109,6 @@ export default function Battleship() {
     const resetGame = () => {
         stopTimer()
         makeBoard()
-        setMark(true)
         startGame(false)
         setSeconds(30)
         setShipCount(3)
@@ -134,7 +131,7 @@ export default function Battleship() {
     }
 
     const gameResult = () => {
-
+        setClickCount(0)
         if (seconds === 0) {
             return 'Time is up! Ships remaining'
         }
