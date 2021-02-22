@@ -34,7 +34,6 @@ export default function Battleship() {
     const CIRCLE = 'circle'
 
 
-
     const [start, startGame] = useState(false)
     const [seconds, setSeconds] = useState(30)
     const [ships, setShips] = useState({});
@@ -49,7 +48,6 @@ export default function Battleship() {
     // possible to select difficulty of game. No UI yet.
     const [size, setSize] = useState(5)
     const [clickcount, setClickCount] = useState(15)
-
     const makeBoard = () => {
         let gameboard = [];
         gameboard = Array(size * size).fill(START)
@@ -89,7 +87,7 @@ export default function Battleship() {
         if (!start) {
             setWinner('You should start the game first.')
         }
-        else if (shipcount > 0 && clickcount > 0) {
+        else if (board[number] === START && shipcount > 0 && clickcount > 0) {
             setClickCount(clickcount - 1)
 
             if (ships.has(number)) {
@@ -100,9 +98,6 @@ export default function Battleship() {
             else {
                 board[number] = CROSS
             }
-        }
-        else {
-            setWinner(gameResult())
         }
     }
 
