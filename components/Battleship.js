@@ -57,7 +57,7 @@ export default function Battleship() {
 
         const nums = new Set();
         while (nums.size !== 3) {
-            nums.add(Math.floor(Math.random() * (size * size - 1)));
+            nums.add(Math.floor(Math.random() * (size * size)));
         }
         setShips(nums)
     }
